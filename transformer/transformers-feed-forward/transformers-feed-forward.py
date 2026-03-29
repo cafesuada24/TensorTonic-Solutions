@@ -6,6 +6,4 @@ def feed_forward(x: np.ndarray, W1: np.ndarray, b1: np.ndarray,
     Apply position-wise feed-forward network.
     """
     # Your code here
-    t = x @ W1 + b1
-    t[t < 0] = 0
-    return t @ W2 + b2
+    return np.maximum(0, x @ W1 + b1) @ W2 + b2
