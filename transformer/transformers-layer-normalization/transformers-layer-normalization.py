@@ -14,4 +14,4 @@ def layer_norm(x: np.ndarray, gamma: np.ndarray, beta: np.ndarray, eps: float = 
         Normalized array of same shape as x
     """
     # Your code here
-    return gamma * (x - x.mean(axis=-1)[:,:,None]) / np.sqrt(x.var(axis=-1)[:,:,None] + eps) + beta
+    return gamma * (x - x.mean(axis=2, keepdims=True)) / np.sqrt(x.var(axis=-1, keepdims=True) + eps) + beta
