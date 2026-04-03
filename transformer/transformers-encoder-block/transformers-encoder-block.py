@@ -9,10 +9,10 @@ def layer_norm(x: np.ndarray, gamma: np.ndarray, beta: np.ndarray, eps: float = 
     """
     Apply layer normalization.
     """
+    var = x.var(axis=-1, keepdims=True)
+    mean = x.mean(axis=-1, keepdims=True)
     
-    numerator = x - x.mean(axis=-1, keepdims=True)
-    denomerator = np.sqrt(x.var(axis=-1, keepdims=True) + eps)
-    return gamma * numerator / denomerator + beta
+    return gamma * (x - mean) / np.sqrt(var + eps) + beta
 
 def multi_head_attention(Q: np.ndarray, K: np.ndarray, V: np.ndarray,
                          W_q: np.ndarray, W_k: np.ndarray, W_v: np.ndarray,
